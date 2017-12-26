@@ -1,19 +1,23 @@
 var init = function () {
-    var div = $("#bubbleA");
-    var text = div.html();
-    div.html('<span class="show"></span><span class="hide" style="visibility: hidden;">' + $.trim(text) + '</span>');
+    var div = document.querySelector("#bubbleA");
+    var text = div.innerHTML;
+    div.innerHTML = '<span class="show"></span><span class="hide" style="visibility: hidden;">' + text.trim() + '</span>';
 };
 
 var step = function () {
-    var clone = $("#bubbleA").children().clone();
-    var textShown = $(clone[0]).text();
-    var textHidden = $(clone[1]).text();
-    $(clone[0]).text(textShown + textHidden.substr(0, 1));
-    $(clone[1]).text(textHidden.substr(1));
-    $("#bubbleA").html(clone);
+    var $bubble = document.querySelector("#bubbleA");
+    var children = $bubble.children;
+    var $shown = children[0].cloneNode(true);
+    var $hidden = children[1].cloneNode(true);
+    var textShown = $shown.textContent;
+    var textHidden = $hidden.textContent;
+    $shown.textContent = textShown + textHidden.substr(0, 1);
+    $hidden.textContent = textHidden.substr(1);
+    $bubble.innerHTML = "";
+    $bubble.appendChild($shown);
+    $bubble.appendChild($hidden);
     return (textHidden.substr(1).length > 0);
 };
-
 
 var start = function () {
     setTimeout(function () {
@@ -23,10 +27,21 @@ var start = function () {
     }, 22);
 };
 
-$(function () {
-    init();
+
+// === EXAMPLE ===
+document.addEventListener('click',function(){
+    start();
 });
 
-$(document).on('click',function(){
-    start();
+
+function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
+        fn();
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+
+ready(function () {
+    init();
 });
