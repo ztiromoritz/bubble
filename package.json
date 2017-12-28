@@ -1,0 +1,23 @@
+{
+  "name": "bubble",
+  "version": "0.0.1",
+  "description": "Animated text bubbles for html games.",
+  "main": "bubble.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node scripts/liveserver.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ztiromoritz/bubble.git"
+  },
+  "author": "Moritz Rebbert <moritz.rebbert@udo.edu>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ztiromoritz/bubble/issues"
+  },
+  "homepage": "https://github.com/ztiromoritz/bubble#readme",
+  "devDependencies": {
+    "live-server": "^1.2.0"
+  }
+}
