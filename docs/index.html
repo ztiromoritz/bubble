@@ -41,7 +41,6 @@
     var running = false;
     var onClick = function () {
         if (!running) {
-            console.log("start");
             running = true;
             handler.reset();
             handler.start(function () {
@@ -70,7 +69,6 @@
 
             var htmls = $container.querySelectorAll("code[class*='language-markup']");
             [].forEach.call(htmls, function(code) {
-                console.log(code.innerText,  Prism.languages);
                 code.innerHTML = Prism.highlight(code.innerText, Prism.languages.markup);
             });
         }
