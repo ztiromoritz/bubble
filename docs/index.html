@@ -59,7 +59,7 @@
     var $container = document.getElementById('mdcontainer');
 
     var request = new XMLHttpRequest();
-    request.open('GET', '../README.md', true);
+    request.open('GET', 'https://raw.githubusercontent.com/ztiromoritz/bubble/master/README.md', true);
 
     request.onload = function() {
         if (request.status >= 200 && request.status < 400) {
