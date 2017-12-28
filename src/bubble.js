@@ -38,7 +38,7 @@
                     handler.start();
                 }else{
                     if(typeof callback === 'function'){
-                        callback;
+                        callback();
                     }
                 }
             }, 22);
