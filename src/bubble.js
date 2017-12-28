@@ -13,11 +13,19 @@
     }
 }(this, function () {
 
-    return function (element) {
+    return function (element, options) {
 
-        var handler = {}, text = element.innerText;;
+        // Settings
+        options = options || {};
+        var invisibleStyle = '';
+        if(options.grow){
+            invisibleStyle = 'display: none;';
+        }else{
+            invisibleStyle = 'visibility: hidden;';
+        }
 
-
+        // Handler
+        var handler = {}, text = element.innerText;
         handler.step = function () {
             var children = element.children;
             var $shown = children[0].cloneNode(true);
@@ -49,8 +57,7 @@
         };
 
         handler.reset = function(){
-            console.log("reset");
-            element.innerHTML = '<span class="show"></span><span class="hide" style="visibility: hidden;">' + text.trim() + '</span>';
+            element.innerHTML = '<span class="show"></span><span class="hide" style="'+invisibleStyle+'">' + text.trim() + '</span>';
         };
 
         handler.reset();
