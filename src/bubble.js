@@ -14,9 +14,9 @@
 }(this, function () {
 
     return function (element) {
-        var text = element.innerText;
-        element.innerHTML = '<span class="show"></span><span class="hide" style="visibility: hidden;">' + text.trim() + '</span>';
-        var handler = {};
+
+        var handler = {}, text = element.innerText;;
+
 
         handler.step = function () {
             var children = element.children;
@@ -32,17 +32,28 @@
             return (textHidden.substr(1).length > 0);
         };
 
-        handler.start = function (callback) {
-            setTimeout(function () {
-                if (handler.step()) {
-                    handler.start();
-                }else{
-                    if(typeof callback === 'function'){
-                        callback();
+        handler.start = function (callback, delay) {
+            delay = (typeof delay === 'number')?delay:22;
+            var run = function () {
+                setTimeout(function () {
+                    if (handler.step()) {
+                        run();
+                    } else {
+                        if (typeof callback === 'function') {
+                            callback();
+                        }
                     }
-                }
-            }, 22);
+                }, delay);
+            };
+            run();
         };
+
+        handler.reset = function(){
+            console.log("reset");
+            element.innerHTML = '<span class="show"></span><span class="hide" style="visibility: hidden;">' + text.trim() + '</span>';
+        };
+
+        handler.reset();
 
         return handler;
     };
